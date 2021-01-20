@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+option java_package = "com.mgabor.datastoresampleapp";
+option java_multiple_files = true;
+
+message UserPreferences {
+    string first_name = 1;
+    string last_name = 2;
+    int64 birth_day = 3;
+}

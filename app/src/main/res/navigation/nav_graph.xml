@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/navDirectionMain">
+
+    <fragment
+        android:id="@+id/navDirectionMain"
+        android:name="com.mgabor.datastoresampleapp.ui.main.MainFragment"
+        android:label="@string/main_menu"
+        tools:layout="@layout/fragment_main">
+
+       <action
+            android:id="@id/navDirectionForm"
+            app:destination="@id/navDirectionForm" />
+
+        <action
+            android:id="@id/navDirectionDetail"
+            app:destination="@id/navDirectionDetail" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navDirectionForm"
+        android:name="com.mgabor.datastoresampleapp.ui.form.FormFragment"
+        android:label="@string/user_form"
+        tools:layout="@layout/fragment_form" />
+
+    <fragment
+        android:id="@+id/navDirectionDetail"
+        android:name="com.mgabor.datastoresampleapp.ui.detail.DetailFragment"
+        android:label="@string/user_detail"
+        tools:layout="@layout/fragment_detail" />
+</navigation>

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">DataStoreSampleApp</string>
+    <string name="main_menu">Main menu</string>
+
+    <string name="user_form">User form</string>
+    <string name="user_detail">User detail</string>
 </resources>
