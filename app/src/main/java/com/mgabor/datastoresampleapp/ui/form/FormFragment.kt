@@ -9,9 +9,12 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.mgabor.datastoresampleapp.R
 import com.mgabor.datastoresampleapp.databinding.FragmentFormBinding
+import com.mgabor.datastoresampleapp.util.fragmentScope
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import java.util.Calendar
 
 @AndroidEntryPoint
@@ -34,7 +37,7 @@ class FormFragment : Fragment() {
         return binding.root
     }
 
-    private var dateSetListener =
+    private val dateSetListener =
         OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
             val selectedDate = Calendar.getInstance()
 
@@ -47,12 +50,21 @@ class FormFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val selectedDate = Calendar.getInstance()
+
         view.findViewById<View>(R.id.birthdayEditText).setOnClickListener {
             DatePickerDialog(
                 requireContext(), dateSetListener, selectedDate
                     .get(Calendar.YEAR), selectedDate.get(Calendar.MONTH),
                 selectedDate.get(Calendar.DAY_OF_MONTH)
-            ).show()
+            ).apply {
+                datePicker.minDate = 0
+            }.show()
+        }
+
+        viewModel.onSaveFinishedCallback = {
+            fragmentScope.launch {
+                requireActivity().onBackPressed()
+            }
         }
     }
 }

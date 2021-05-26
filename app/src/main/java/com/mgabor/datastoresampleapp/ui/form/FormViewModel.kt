@@ -16,15 +16,20 @@ class FormViewModel @Inject constructor(
 
     val firstName = MutableLiveData<String>()
     val lastName = MutableLiveData<String>()
-    val birthDay = MutableLiveData<Long>()
+    val birthDay = MutableLiveData<Long>(-1)
 
-    fun saveData(){
+    var onSaveFinishedCallback: (() -> Unit)? = null
+
+    fun saveData() {
         viewModelScope.launchOnDefault {
-            userService.addUser(User(
-                firstName = firstName.value!!,
-                lastName = lastName.value!!,
-                birthDay = birthDay.value!!
-            ))
+            userService.addUser(
+                User(
+                    firstName = firstName.value ?: "",
+                    lastName = lastName.value ?: "",
+                    birthDay = birthDay.value ?: 0
+                )
+            )
+            onSaveFinishedCallback?.invoke()
         }
     }
 }

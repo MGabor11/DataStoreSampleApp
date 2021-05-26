@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import java.text.SimpleDateFormat
-import java.util.Date
+import java.util.*
 
 @BindingAdapter(value = ["layoutManager", "list"], requireAll = false)
 fun <T> RecyclerView.bindRecyclerViewData(
@@ -19,8 +19,11 @@ fun <T> RecyclerView.bindRecyclerViewData(
 
 @BindingAdapter("birthDay")
 fun TextView.bindBirthDay(birthDay: Long) {
-    val simpleDateFormat = SimpleDateFormat("EEEE, dd-MMM-yyyy")
-    val dateTime = simpleDateFormat.format(Date(birthDay))
-
-    text = dateTime
+    text = if (birthDay > 0) {
+        val simpleDateFormat = SimpleDateFormat("EEEE, dd-MMM-yyyy", Locale.getDefault())
+        val dateTime = simpleDateFormat.format(Date(birthDay))
+        dateTime
+    } else {
+        ""
+    }
 }
