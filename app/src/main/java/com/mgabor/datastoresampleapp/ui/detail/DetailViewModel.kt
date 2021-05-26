@@ -23,7 +23,7 @@ class DetailViewModel @Inject constructor(
     ) { fromDB, fromPreferencesDataStore, fromProtoDataStore, fromSharedPreferences ->
         listOf(
             UserDataSource.ROOM to fromDB,
-            UserDataSource.PREFERENCE_DATA_STORE to fromPreferencesDataStore,
+            UserDataSource.PREFERENCES_DATA_STORE to fromPreferencesDataStore,
             UserDataSource.PROTO_DATA_STORE to fromProtoDataStore,
             UserDataSource.SHARED_PREFERENCES to fromSharedPreferences
         )
