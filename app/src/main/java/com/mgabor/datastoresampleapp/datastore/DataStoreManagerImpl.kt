@@ -21,10 +21,10 @@ class DataStoreManagerImpl @Inject constructor(
     private val USER_BIRTH_DAY = longPreferencesKey("user_birth_day")
 
     override suspend fun saveUserToPreferenceStore(user: User) {
-        userPreferencesDataStore.edit { settings ->
-            settings[USER_FIRST_NAME] = user.firstName
-            settings[USER_LAST_NAME] = user.lastName
-            settings[USER_BIRTH_DAY] = user.birthDay
+        userPreferencesDataStore.edit { preferences ->
+            preferences[USER_FIRST_NAME] = user.firstName
+            preferences[USER_LAST_NAME] = user.lastName
+            preferences[USER_BIRTH_DAY] = user.birthDay
         }
     }
 
@@ -48,11 +48,11 @@ class DataStoreManagerImpl @Inject constructor(
     }
 
     override fun getUserFromProtoStore(): Flow<User> =
-        userProtoDataStore.data.map { settings ->
+        userProtoDataStore.data.map { user ->
             User(
-                firstName = settings.firstName,
-                lastName = settings.lastName,
-                birthDay = settings.birthDay
+                firstName = user.firstName,
+                lastName = user.lastName,
+                birthDay = user.birthDay
             )
         }
 }
