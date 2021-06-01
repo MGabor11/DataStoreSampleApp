@@ -11,18 +11,19 @@ import com.mgabor.datastoresampleapp.R
 import com.mgabor.datastoresampleapp.databinding.FragmentDetailBinding
 import com.mgabor.datastoresampleapp.ui.detail.adapter.UserListAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_detail.*
 
 @AndroidEntryPoint
 class DetailFragment : Fragment() {
 
     private val viewModel: DetailViewModel by viewModels()
 
+    private lateinit var binding : FragmentDetailBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding: FragmentDetailBinding = DataBindingUtil.inflate(
+        binding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_detail, container, false
         )
@@ -34,7 +35,7 @@ class DetailFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        userRecyclerView.adapter = UserListAdapter()
+        binding.userRecyclerView.adapter = UserListAdapter()
         super.onViewCreated(view, savedInstanceState)
     }
 }
