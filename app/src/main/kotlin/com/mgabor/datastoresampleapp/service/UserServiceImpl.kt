@@ -35,7 +35,7 @@ class UserServiceImpl @Inject constructor(
             }
 
 
-    override fun getUserFromPreferencesDataStore() = dataStoreManager.getUserFromPreferenceStore()
+    override fun getUserFromPreferencesDataStore() = dataStoreManager.getUserFromPreferencesStore()
 
     override fun getUserFromProtoDataStore() = dataStoreManager.getUserFromProtoStore()
 
@@ -52,7 +52,7 @@ class UserServiceImpl @Inject constructor(
             )
         )
         //Add to Preference DataStore
-        dataStoreManager.saveUserToPreferenceStore(user)
+        dataStoreManager.saveUserToPreferencesStore(user)
 
         //Add to Proto DataStore
         dataStoreManager.saveUserToProtoStore(user)

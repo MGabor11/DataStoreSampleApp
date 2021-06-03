@@ -5,7 +5,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
-import com.mgabor.datastoresampleapp.UserPreferences
+import com.mgabor.datastoresampleapp.UserPreference
 import com.mgabor.datastoresampleapp.data.User
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -13,14 +13,14 @@ import javax.inject.Inject
 
 class DataStoreManagerImpl @Inject constructor(
     private val userPreferencesDataStore: DataStore<Preferences>,
-    private val userProtoDataStore: DataStore<UserPreferences>
+    private val userProtoDataStore: DataStore<UserPreference>
 ) : DataStoreManager {
 
     private val USER_FIRST_NAME = stringPreferencesKey("user_first_name")
     private val USER_LAST_NAME = stringPreferencesKey("user_last_name")
     private val USER_BIRTH_DAY = longPreferencesKey("user_birth_day")
 
-    override suspend fun saveUserToPreferenceStore(user: User) {
+    override suspend fun saveUserToPreferencesStore(user: User) {
         userPreferencesDataStore.edit { preferences ->
             preferences[USER_FIRST_NAME] = user.firstName
             preferences[USER_LAST_NAME] = user.lastName
@@ -28,7 +28,7 @@ class DataStoreManagerImpl @Inject constructor(
         }
     }
 
-    override fun getUserFromPreferenceStore(): Flow<User> = userPreferencesDataStore.data
+    override fun getUserFromPreferencesStore(): Flow<User> = userPreferencesDataStore.data
         .map { preferences ->
             User(
                 firstName = preferences[USER_FIRST_NAME] ?: "",

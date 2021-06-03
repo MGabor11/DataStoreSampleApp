@@ -5,11 +5,8 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.dataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
-import androidx.room.Room
-import com.mgabor.datastoresampleapp.UserPreferences
+import com.mgabor.datastoresampleapp.UserPreference
 import com.mgabor.datastoresampleapp.datastore.UserSerializer
-import com.mgabor.datastoresampleapp.db.UserDao
-import com.mgabor.datastoresampleapp.db.UserDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,7 +22,7 @@ class DataStoreServiceModule {
         name = "user"
     )
 
-    private val Context.userProtoDataStore: DataStore<UserPreferences> by dataStore(
+    private val Context.userProtoDataStore: DataStore<UserPreference> by dataStore(
         fileName = "user.pb",
         serializer = UserSerializer
     )
@@ -40,5 +37,5 @@ class DataStoreServiceModule {
     @Provides
     fun provideUserProtoDataStore(
         @ApplicationContext app: Context
-    ): DataStore<UserPreferences> = app.userProtoDataStore
+    ): DataStore<UserPreference> = app.userProtoDataStore
 }
