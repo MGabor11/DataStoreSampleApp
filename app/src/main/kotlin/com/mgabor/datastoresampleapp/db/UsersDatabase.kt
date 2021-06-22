@@ -10,18 +10,18 @@ abstract class UserDatabase : RoomDatabase() {
 }
 
 @Dao
-abstract class UserDao {
+interface UserDao {
 
     companion object {
         private const val DEFAULT_USER_ID = 0
     }
 
     @Query("SELECT * FROM user")
-    abstract fun getUsers(): Flow<List<UserDataModel>>
+    fun getUsers(): Flow<List<UserDataModel>>
 
     @Query("SELECT * FROM user WHERE id = :userId")
-    abstract fun getUser(userId: Int = DEFAULT_USER_ID): Flow<UserDataModel>
+    fun getUser(userId: Int = DEFAULT_USER_ID): Flow<UserDataModel>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun insert(item: UserDataModel)
+    fun insert(item: UserDataModel)
 }
