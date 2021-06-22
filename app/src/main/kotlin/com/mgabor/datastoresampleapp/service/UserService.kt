@@ -7,7 +7,7 @@ interface UserService {
 
     fun getUser(): Flow<User>
 
-    fun getUserFromSharedPreferences(): Flow<User>
+    fun getUserFromSharedPreferences(): User
 
     fun getUserFromDB(): Flow<User>
 

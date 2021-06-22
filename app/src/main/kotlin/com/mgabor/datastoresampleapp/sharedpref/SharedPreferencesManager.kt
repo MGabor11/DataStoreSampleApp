@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface SharedPreferencesManager {
     fun saveUser(user: User)
-    fun getUser(): Flow<User>
+    fun getUser(): User
 }

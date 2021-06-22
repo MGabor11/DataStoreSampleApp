@@ -13,19 +13,18 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailViewModel @Inject constructor(
     userService: UserService
-    ) : ViewModel() {
+) : ViewModel() {
 
     val userList: LiveData<List<Pair<UserDataSource, User>>> = combine(
         userService.getUserFromDB(),
         userService.getUserFromPreferencesDataStore(),
-        userService.getUserFromProtoDataStore(),
-        userService.getUserFromSharedPreferences()
-    ) { fromDB, fromPreferencesDataStore, fromProtoDataStore, fromSharedPreferences ->
+        userService.getUserFromProtoDataStore()
+    ) { fromDB, fromPreferencesDataStore, fromProtoDataStore ->
         listOf(
             UserDataSource.ROOM to fromDB,
             UserDataSource.PREFERENCES_DATA_STORE to fromPreferencesDataStore,
             UserDataSource.PROTO_DATA_STORE to fromProtoDataStore,
-            UserDataSource.SHARED_PREFERENCES to fromSharedPreferences
+            UserDataSource.SHARED_PREFERENCES to userService.getUserFromSharedPreferences()
         )
     }.asLiveDataOnDefault()
 }
