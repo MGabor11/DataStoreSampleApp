@@ -1,6 +1,7 @@
 package com.mgabor.datastoresampleapp.sharedpref
 
 import android.content.Context
+import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import com.mgabor.datastoresampleapp.data.User
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -13,11 +14,10 @@ class SharedPreferencesManagerImpl @Inject constructor(
     private val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
 
     override fun saveUser(user: User) {
-        with(sharedPref.edit()) {
+        sharedPref.edit {
             putString(PREF_FIRST_NAME, user.firstName)
             putString(PREF_LAST_NAME, user.lastName)
             putLong(PREF_BIRTH_DAY, user.birthDay)
-            apply()
         }
     }
 
