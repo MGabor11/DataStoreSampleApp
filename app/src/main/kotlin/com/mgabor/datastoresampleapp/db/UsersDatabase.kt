@@ -23,5 +23,5 @@ interface UserDao {
     fun getUser(userId: Int = DEFAULT_USER_ID): Flow<UserDataModel>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(item: UserDataModel)
+    suspend fun insert(item: UserDataModel)
 }
